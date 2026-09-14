@@ -1,0 +1,42 @@
+记住：只有 commit 才算版本，单纯 add 不算存档
+不想推送云端也可以大量 commit，commit 就是本地备份点
+
+
+ cd /d/QT_project/IMChat/IMChat  进入文件夹
+
+
+git log --oneline  查看历史版本
+
+
+提交修改到本地
+git add .
+git commit -m "更新IM聊天代码"
+
+
+git pull origin main：拉，从远程下载代码到本地（别人 / 云端 → 你的电脑）
+git push origin main：推，把本地提交上传到远程（你的电脑 → 云端仓库）
+
+
+1：临时切换到旧版本查看代码（推荐，不改动历史
+# 把哈希换成你查到的
+git checkout a72bc18
+切回最新 master 版本：
+git checkout master
+
+
+二、临时保存半成品（不想 commit，但要切代码 / 临时实验）
+git stash 「临时储物柜」
+场景：写到一半，想临时改别的代码，但是不想生成正式 commit
+
+#把当前改动暂时存起来，工作区变干净
+git stash
+#查看所有暂存的临时储藏（可以存多份）
+git stash list
+#取出最近一次储藏，恢复代码
+git stash pop
+
+只是删掉那次存档，代码还在，可以修改后重新 commit
+git reset --soft HEAD~1
+
+
+git reset --hard 哈希值

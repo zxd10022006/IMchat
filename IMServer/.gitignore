@@ -1,0 +1,16 @@
+# VS缓存
+.vs/
+*.suo
+*.vcxproj.user
+# 编译输出
+Debug/
+Release/
+x64/
+x86/
+# 日志、临时文件
+*.log
+*.tmp
+# 可执行程序、pdb调试文件
+*.exe
+*.pdb
+*.ilk

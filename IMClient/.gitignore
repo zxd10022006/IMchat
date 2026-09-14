@@ -1,0 +1,21 @@
+# Qt 编译文件
+debug/
+release/
+build-*/
+*.user
+*.autosave
+ui_*.h
+qrc_*.cpp
+Makefile
+Makefile.*
+*.o
+*.moc
+
+# 可执行文件、调试文件
+*.exe
+*.dll
+*.pdb
+
+# 系统文件
+Thumbs.db
+.DS_Store
