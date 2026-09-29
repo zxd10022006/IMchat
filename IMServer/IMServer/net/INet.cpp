@@ -23,14 +23,33 @@ bool INet::sendAll(SOCKET s, const char* data, int len) {
 		std::cout << __func__ << ": paramater error" << std::endl;
 		return false;
 	}
-	if (send(s, (const char*)&len, sizeof(int), 0) == SOCKET_ERROR) {
-		std::cout << __func__ << ": send head error " << WSAGetLastError() << std::endl;
-		return false;
-	}
-	if (send(s, data, len, 0) == SOCKET_ERROR) {
-		std::cout << __func__ << ": send data error " << WSAGetLastError() << std::endl;
-		return false;
-	}
+	//发送4字节长度头
+		const char* pHead = (const char*)&len;
+		int headRemain = sizeof(int);
+		int offset = 0;
+		while (headRemain>0) {
+			int n = send(s, pHead + offset, headRemain, 0);
+			if (n == SOCKET_ERROR) {
+				std::cout << __func__ << ":send head error" << WSAGetLastError() << std::endl;
+				return false;
+			}
+			headRemain -= n;
+			offset += n;
+
+		}
+
+		//发送数据
+		int dataRemain = len;
+		offset = 0;
+		while (dataRemain>0) {
+			int n = send(s, data+offset, dataRemain, 0);
+			if (n == SOCKET_ERROR) {
+				std::cout << __func__ << ":send data error" << WSAGetLastError() << std::endl;
+				return false;
+			}
+			dataRemain -= n;
+			offset += n;
+		}
 	return true;
 }
 

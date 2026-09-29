@@ -1,0 +1,30 @@
+add_executable(IMServer
+    main.cpp
+    Kernel.cpp
+    Kernel.h
+    mediator/INetMed.h
+    mediator/TcpServerMed.cpp
+    mediator/TcpServerMed.h
+    net/INet.cpp
+    net/INet.h
+    net/TcpServer.cpp
+    net/TcpServer.h
+    net/def.h
+    MySQL/CMySql.cpp
+    MySQL/CMySql.h
+)
+
+target_include_directories(IMServer PRIVATE ${CMAKE_CURRENT_SOURCE_DIR})
+
+if(MSVC)
+    target_compile_options(IMServer PRIVATE /utf-8)
+endif()
+
+# Windows 网络库
+target_link_libraries(IMServer PRIVATE Ws2_32)
+
+# MySQL 客户端库 —— 见第 4 步，三选一
+target_link_libraries(IMServer PRIVATE unofficial::libmysql)
+
+# 日志/JSON（步骤三、五接入，先注释占位）
+# target_link_libraries(IMServer PRIVATE spdlog::spdlog nlohmann_json::nlohmann_json)

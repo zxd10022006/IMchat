@@ -5,7 +5,7 @@
 #include <iostream>
 #include <list>
 
-#pragma comment(lib, "libmysql.lib")
+//#pragma comment(lib, "libmysql.lib")
 
 // MySQL 数据库操作类：连接、查询、更新、断开连接
 class CMySql

@@ -1,6 +1,6 @@
 #pragma once
 #include "mediator/INetMed.h"
-#include "mysql/CMySql.h"
+#include "MySQL/CMySql.h"
 #include "net/def.h"
 #include <iostream>
 #include <map>

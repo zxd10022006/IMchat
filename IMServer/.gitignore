@@ -14,3 +14,19 @@ x86/
 *.exe
 *.pdb
 *.ilk
+
+# CMake构建目录
+build/
+build-*/
+
+# VS编译中间文件
+*.obj
+*.tlog
+*.pdb
+*.ilk
+*.exp
+*.log
+
+# vcpkg本地安装产物（清单模式生成的）
+vcpkg_installed/
+vcpkg-manifest-install.log

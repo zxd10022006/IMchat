@@ -54,10 +54,29 @@ bool TcpClient::sendData(char* data, int len, u_long to) {
         return false;
     }
 
-    send(m_sock, (char*)&len, sizeof(int), 0);
-    int num = send(m_sock, data, len, 0);
-    if (num == SOCKET_ERROR) {
-        std::cout << "TcpClient:: sendData error" << std::endl;
+    int headremain=sizeof(int);
+    int offset=0;
+    while(headremain>0){
+        int n=send(m_sock,(char*)&len+offset,headremain,0);
+        if(n==SOCKET_ERROR){
+            std::cout<<"TcpClient:: sendData error";
+            return false;
+        }
+        headremain-=n;
+        offset+=n;
+    }
+
+    int Remain=len;
+    offset=0;
+    while(Remain>0){
+        int n=send(m_sock,data+offset,Remain,0);
+        if(n==SOCKET_ERROR){
+            std::cout<<"TcpClient:: sendData error";
+            return false;
+        }
+        Remain-=n;
+        offset+=n;
+
     }
 
     return true;
